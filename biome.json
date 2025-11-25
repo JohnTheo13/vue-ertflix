@@ -1,6 +1,12 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.7/schema.json",
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -19,15 +25,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.vue"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noUnusedVariables": "off",
-            "noUnusedImports": "off"
-          }
-        }
-      }
+      "includes": ["**/*.vue"]
     }
   ]
 }
