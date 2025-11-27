@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import ShowCard from '~/components/ShowCard.vue';
 import { useGetApi } from '~/composables/useGetApi';
 import type { Show } from '~/types/Show';
 
@@ -38,10 +39,6 @@ onMounted(() => {
     fetchData(`search/shows?q=${searchQuery.value}`);
   }
 });
-
-const navigateToShow = (id: number) => {
-  router.push(`/details/${id}`);
-};
 </script>
 
 <template>
@@ -60,26 +57,25 @@ const navigateToShow = (id: number) => {
     <div v-if="isLoading" class="loading-state">Searching...</div>
 
     <div v-else-if="results && results.length > 0" class="results-grid">
-      <div
+      <show-card
         v-for="show in results"
         :key="show.show.id"
-        class="show-card"
-        @click="navigateToShow(show.show.id)"
-      >
-        <img
-          v-if="show.show.image"
-          :src="show.show.image.medium"
-          :alt="show.show.name"
-          class="show-thumbnail"
-        />
-        <div v-else class="placeholder-img">No Image</div>
-        <div class="show-info">
-          <h3>{{ show.show.name }}</h3>
-        </div>
-      </div>
+        :id="show.show.id"
+        :image="show.show.image?.medium"
+        :title="show.show.name"
+        :genre="show.show.genres[0] ?? 'N/A'"
+        :rating="show.show.rating?.average?.toString() ?? 'N/A'"
+      />
     </div>
 
-    <div v-else-if="searchQuery && !isLoading" class="empty-state">
+    <div
+      v-if="
+        searchQuery.length > 0 &&
+        !isLoading &&
+        (!results || results.length === 0)
+      "
+      class="empty-state"
+    >
       No results found for "{{ searchQuery }}"
     </div>
   </div>
@@ -87,9 +83,10 @@ const navigateToShow = (id: number) => {
 
 <style scoped>
 .search-page {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 1rem 2rem;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-header {
@@ -102,60 +99,64 @@ const navigateToShow = (id: number) => {
   max-width: 600px;
   padding: 1rem;
   font-size: 1.2rem;
-  border: 2px solid #ddd;
+  border: 2px solid #444;
   border-radius: 8px;
   margin-top: 1rem;
   transition: border-color 0.3s;
+  
+  box-sizing: border-box; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: black;
+  color: white;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #42b983;
+  border-color: white;
 }
 
 .results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
+  gap: 3rem;
+  margin-top: 2rem;
+  justify-items: center;
 }
-
-.show-card {
-  cursor: pointer;
-  transition: transform 0.2s;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
-
-.show-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.show-thumbnail {
-  width: 100%;
-  aspect-ratio: 2/3;
-  object-fit: cover;
-  display: block;
-}
-
-.show-info {
-  padding: 1rem;
-}
-
-.show-info h3 {
-  margin: 0;
-  font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .loading-state,
 .empty-state {
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: #888;
   font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .search-page {
+    padding: 1rem;
+  }
+
+  .search-input {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 }
 </style>

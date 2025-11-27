@@ -1,19 +1,16 @@
 <template>
-  <div class="show-card">
-      <router-link
-        :to="`/details/${id}`"
-        class="show-card-link"
-      >
+  <button class="show-card" @click="navigateToShow(id)">
       <img :src="image" :alt="title" />
       <div class="show-card-info">
         <div>{{ genre }}</div>
         <div>{{ rating }} ⭐</div>
       </div>
-    </router-link>
-    </div>
+  </button>
 </template>
 
 <script setup lang="ts">
+import { router } from '~/router';
+
 defineProps<{
   image?: string;
   title: string;
@@ -21,16 +18,42 @@ defineProps<{
   rating: string;
   id: number;
 }>();
+
+const navigateToShow = (id: number) => {
+  router.push(`/details/${id}`);
+};
 </script>
 
 <style scoped>
 .show-card {
   flex: 0 0 auto;
-  width: 200px;
+  width: 100%;
+  max-width: 240px; /* Prevent cards from getting too wide */
+  margin: 0 auto;
   margin-right: 10px;
   transition: transform 0.2s;
   user-select: none; /* Prevent text selection while dragging */
   position: relative;
+
+  /* Reset button styles */
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+  text-align: left; /* Ensure content aligns correctly */
+}
+
+@media (max-width: 768px) {
+  .show-card {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .show-card {
+    max-width: 150px;
+  }
 }
 
 .show-card:hover {
