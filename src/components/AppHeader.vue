@@ -3,6 +3,7 @@
     <img src="/logo.svg" alt="Erthflix" class="logo" />
     <nav>
       <router-link to="/">Home</router-link>
+      <router-link to="/search">Search</router-link>
     </nav>
   </header>
 </template>

@@ -9,10 +9,10 @@ export function useGetApi<T>(
   const data = ref<T | null>(null);
   const error = ref<ParsedError | null>(null);
   const loading = ref<boolean>(false);
-  const fetchData = async () => {
+  const fetchData = async (newUrl?: string) => {
     loading.value = true;
     try {
-      const response = await apiFetch(url, options);
+      const response = await apiFetch(newUrl || url, options);
       data.value = response;
     } catch (err: unknown) {
       error.value = err as ParsedError;
