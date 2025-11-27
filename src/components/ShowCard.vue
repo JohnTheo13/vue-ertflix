@@ -16,7 +16,7 @@ const router = useRouter()
 defineProps<{
   image?: string
   title: string
-  genre: string
+  genre?: string
   rating: string
   id: number
   className?: string
@@ -71,9 +71,10 @@ const navigateToShow = (id: number) => {
 .show-card-info {
   position: absolute;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding: 0 1.2rem;
   align-items: flex-end;
-  top: 8px;
+  top: 1rem;
   width: -webkit-fill-available;
   color: white;
   font-size: 1.2rem;

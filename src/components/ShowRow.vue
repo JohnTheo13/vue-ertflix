@@ -10,7 +10,6 @@
           :id="item.id"
           :image="item.image?.medium"
           :title="item.name"
-          :genre="item.genres[0] ?? 'N/A'"
           :rating="item.rating?.average?.toString() ?? 'N/A'"
         />
       </div>
@@ -20,51 +19,50 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
-import type { Show } from '~/types/Show';
-import ShowCard from './ShowCard.vue';
+import { onMounted, onUnmounted, ref } from 'vue'
+import type { Show } from '~/types/Show'
+import ShowCard from './ShowCard.vue'
 
 defineProps<{
-  title: string;
-  items: Show[];
-}>();
+  title: string
+  items: Show[]
+}>()
 
-const track = ref<HTMLElement | null>(null);
-const canScrollLeft = ref(false);
-const canScrollRight = ref(true);
+const track = ref<HTMLElement | null>(null)
+const canScrollLeft = ref(false)
+const canScrollRight = ref(true)
 
 const checkScroll = () => {
   if (track.value) {
-    const { scrollLeft, scrollWidth, clientWidth } = track.value;
-    canScrollLeft.value = scrollLeft > 0;
+    const { scrollLeft, scrollWidth, clientWidth } = track.value
+    canScrollLeft.value = scrollLeft > 0
     // Allow a small buffer (1px) for float precision issues
-    canScrollRight.value = scrollLeft + clientWidth < scrollWidth - 1;
+    canScrollRight.value = scrollLeft + clientWidth < scrollWidth - 1
   }
-};
+}
 
 const scrollLeft = () => {
   if (track.value) {
-    track.value.scrollBy({ left: -600, behavior: 'smooth' });
+    track.value.scrollBy({ left: -600, behavior: 'smooth' })
     // checkScroll will be triggered by the scroll event
   }
-};
+}
 
 const scrollRight = () => {
   if (track.value) {
-    track.value.scrollBy({ left: 600, behavior: 'smooth' });
+    track.value.scrollBy({ left: 600, behavior: 'smooth' })
     // checkScroll will be triggered by the scroll event
   }
-};
+}
 
 onMounted(() => {
-  checkScroll();
-  window.addEventListener('resize', checkScroll);
-});
+  checkScroll()
+  window.addEventListener('resize', checkScroll)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkScroll);
-});
-
+  window.removeEventListener('resize', checkScroll)
+})
 </script>
 
 <style scoped>

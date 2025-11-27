@@ -1,29 +1,36 @@
 <script setup lang="ts">
-import { inject, watch } from 'vue';
-import ShowRow from '~/components/ShowRow.vue';
-import { useGetApi } from '~/composables/useGetApi';
-import { showsStoreKey } from '~/store/useShowsStore';
-import type { Show } from '~/types/Show';
+import { inject, watch } from 'vue'
+import ShowRow from '~/components/ShowRow.vue'
+import { useGetApi } from '~/composables/useGetApi'
+import { showsStoreKey } from '~/store/useShowsStore'
+import type { Show } from '~/types/Show'
 
-const showsStore = inject(showsStoreKey);
+const showsStore = inject(showsStoreKey)
 if (!showsStore) {
-  throw new Error('Shows store was not provided!');
+  throw new Error('Shows store was not provided!')
 }
 
-const { dramaShows, thrillerShows, fictionShows, setShows, storeReady } =
-  showsStore;
+const {
+  dramaShows,
+  thrillerShows,
+  fictionShows,
+  setShows,
+  storeReady,
+  comedyShows,
+  actionShows,
+} = showsStore
 
 const {
   error,
   loading,
   data: fetchedShows,
-} = useGetApi<Show[]>('shows', !storeReady.value);
+} = useGetApi<Show[]>('shows', !storeReady.value)
 
 watch(fetchedShows, (newShows) => {
   if (newShows) {
-    setShows(newShows);
+    setShows(newShows)
   }
-});
+})
 </script>
 
 <template>
@@ -33,6 +40,8 @@ watch(fetchedShows, (newShows) => {
     <show-row title="Drama" :items="dramaShows" />
     <show-row title="Thriller" :items="thrillerShows" />
     <show-row title="Science Fiction" :items="fictionShows" />
+    <show-row title="Comedy" :items="comedyShows" />
+    <show-row title="Action" :items="actionShows" />
   </template>
 </template>
 

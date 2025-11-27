@@ -64,7 +64,7 @@ onMounted(() => {
         :id="show.show.id"
         :image="show.show.image?.medium"
         :title="show.show.name"
-        :genre="show.show.genres[0] ?? 'N/A'"
+        :genre="show.show.genres[0]"
         :rating="show.show.rating?.average?.toString() ?? 'N/A'"
       />
     </div>
