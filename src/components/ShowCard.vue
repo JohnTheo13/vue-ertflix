@@ -1,11 +1,16 @@
 <template>
   <div class="show-card">
-    <img :src="image" :alt="title" />
-    <div class="show-card-info">
-      <div>{{ genre }}</div>
-      <div>{{ rating }} ⭐</div>
+      <router-link
+        :to="`/details/${id}`"
+        class="show-card-link"
+      >
+      <img :src="image" :alt="title" />
+      <div class="show-card-info">
+        <div>{{ genre }}</div>
+        <div>{{ rating }} ⭐</div>
+      </div>
+    </router-link>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +19,7 @@ defineProps<{
   title: string;
   genre: string;
   rating: string;
+  id: number;
 }>();
 </script>
 
@@ -47,6 +53,4 @@ defineProps<{
   font-size: 0.9rem;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
-
-
 </style>

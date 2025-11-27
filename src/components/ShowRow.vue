@@ -9,14 +9,17 @@
       @mouseup="onMouseUp"
       @mousemove="onMouseMove"
     >
-      <show-card
-        v-for="item in items"
-        :key="item.id"
-        :image="item.image?.medium"
-        :title="item.name"
-        :genre="item.genres[0] ?? 'N/A'"
-        :rating="item.rating?.average?.toString() ?? 'N/A'"
-      />
+ 
+        <show-card
+          v-for="item in items"
+          :key="item.id"
+          :id="item.id"
+          :image="item.image?.medium"
+          :title="item.name"
+          :genre="item.genres[0] ?? 'N/A'"
+          :rating="item.rating?.average?.toString() ?? 'N/A'"
+        />
+      
     </div>
   </div>
 </template>
@@ -86,6 +89,7 @@ h2 {
   overflow-x: hidden;
 }
 
+
 .show-scroller.active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
@@ -109,5 +113,4 @@ h2 {
 .show-scroller::-webkit-scrollbar-thumb:hover {
   background-color: #6a6a6a;
 }
-
 </style>

@@ -3,13 +3,14 @@ import { apiFetch, type ParsedError } from '~/api';
 
 export function useGetApi<T>(
   url: string,
-  enabled: boolean = true,
+  enabled = true,
   options: RequestInit = {},
 ) {
   const data = ref<T | null>(null);
   const error = ref<ParsedError | null>(null);
-  const loading = ref<boolean>(true);
+  const loading = ref<boolean>(false);
   const fetchData = async () => {
+    loading.value = true;
     try {
       const response = await apiFetch(url, options);
       data.value = response;
