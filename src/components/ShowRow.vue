@@ -2,7 +2,8 @@
   <div class="show-row">
     <h2>{{ title }}</h2>
     <div class="row-container">
-      <div class="carousel-track">
+      <button v-if="canScrollLeft" class="scroll-btn left" @click="scrollLeft">‹</button>
+      <div class="carousel-track" ref="track" @scroll="checkScroll">
         <show-card
           v-for="item in items"
           :key="item.id"
@@ -13,11 +14,13 @@
           :rating="item.rating?.average?.toString() ?? 'N/A'"
         />
       </div>
+      <button v-if="canScrollRight" class="scroll-btn right" @click="scrollRight">›</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
 import type { Show } from '~/types/Show';
 import ShowCard from './ShowCard.vue';
 
@@ -25,6 +28,43 @@ defineProps<{
   title: string;
   items: Show[];
 }>();
+
+const track = ref<HTMLElement | null>(null);
+const canScrollLeft = ref(false);
+const canScrollRight = ref(true);
+
+const checkScroll = () => {
+  if (track.value) {
+    const { scrollLeft, scrollWidth, clientWidth } = track.value;
+    canScrollLeft.value = scrollLeft > 0;
+    // Allow a small buffer (1px) for float precision issues
+    canScrollRight.value = scrollLeft + clientWidth < scrollWidth - 1;
+  }
+};
+
+const scrollLeft = () => {
+  if (track.value) {
+    track.value.scrollBy({ left: -600, behavior: 'smooth' });
+    // checkScroll will be triggered by the scroll event
+  }
+};
+
+const scrollRight = () => {
+  if (track.value) {
+    track.value.scrollBy({ left: 600, behavior: 'smooth' });
+    // checkScroll will be triggered by the scroll event
+  }
+};
+
+onMounted(() => {
+  checkScroll();
+  window.addEventListener('resize', checkScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScroll);
+});
+
 </script>
 
 <style scoped>
@@ -32,13 +72,43 @@ defineProps<{
   margin: 2rem 0;
 }
 
-/* -------------------------------------- */
-/* 1. CONTAINER & TRACK (The Key CSS)     */
-/* -------------------------------------- */
-
 .row-container {
-  padding: 0 20px; /* Add horizontal padding for a staggered start/end */
+  position: relative;
+  padding: 0 20px; 
   margin-bottom: 40px;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.scroll-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .scroll-btn {
+    display: none;
+  }
 }
 
 .row-title {
@@ -54,6 +124,7 @@ defineProps<{
   overflow-y: hidden;
   padding-bottom: 1rem;
   scrollbar-width: none;
+  z-index: 1;
 }
 .carousel-track::-webkit-scrollbar {
   height: 8px;
@@ -73,39 +144,8 @@ defineProps<{
   background-color: #6a6a6a;
 }
 
-/* 🔑 KEY: Optional - Add CSS scroll snapping for a smoother user experience */
 .carousel-track {
   scroll-snap-type: x mandatory;
 }
 
-/* -------------------------------------- */
-/* 2. ITEM STYLING                        */
-/* -------------------------------------- */
-
-.carousel-item {
-  min-width: 250px;
-  margin-right: 8px;
-
-  /* Visual styling */
-  background-color: #1a1a1a;
-  color: white;
-  border-radius: 4px;
-
-  /* Layout and scroll snapping */
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Apply scroll snap alignment to each item */
-  scroll-snap-align: start;
-
-  /* Optional: Hover effect for a "pop" */
-  transition: transform 0.2s ease-in-out;
-}
-
-.carousel-item:hover {
-  transform: scale(1.08); /* Makes the item slightly larger on hover */
-  z-index: 10;
-}
 </style>

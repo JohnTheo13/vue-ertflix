@@ -70,26 +70,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useGetApi } from '~/composables/useGetApi';
-import { showsStoreKey } from '~/store/useShowsStore';
-import type { Show } from '~/types/Show'; // Ensure this type matches your interface
+import { computed, inject, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGetApi } from '~/composables/useGetApi'
+import { showsStoreKey } from '~/store/useShowsStore'
+import type { Show } from '~/types/Show' // Ensure this type matches your interface
 
-const { params } = useRoute();
+const { params } = useRoute()
 
 // Inject the store using the key. Add a fallback to prevent errors.
-const showsStore = inject(showsStoreKey);
+const showsStore = inject(showsStoreKey)
 
 if (!showsStore) {
-  throw new Error('Shows store was not provided!');
+  throw new Error('Shows store was not provided!')
 }
 
 // Destructure the reactive properties and actions from the store
-const { shows } = showsStore;
+const { shows } = showsStore
 
 const showData = computed(() => {
-  const showId = params.id as string;
+  const showId = params.id as string
   if (shows.value[showId]) {
     // If the show is in our store, return it in a consistent shape.
     // We use `ref()` to make sure the structure matches what useGetApi returns.
@@ -98,26 +98,26 @@ const showData = computed(() => {
       data: ref(shows.value[showId]),
       error: ref(null),
       loading: ref(false),
-    };
+    }
   }
 
   // Otherwise, fetch the show from the API.
-  return useGetApi<Show>(`shows/${showId}`);
-});
+  return useGetApi<Show>(`shows/${showId}`)
+})
 
 // Now, create individual computed refs for each piece of data.
 // Note: useGetApi returns `data`, so we'll rename it to `show`.
-const show = showData.value.data;
-const error = showData.value.error;
-const loading = showData.value.loading;
+const show = showData.value.data
+const error = showData.value.error
+const loading = showData.value.loading
 
 const sanitizedSummary = computed(() => {
   if (show.value?.summary) {
     // Sanitization function can be added here
-    return show.value.summary;
+    return show.value.summary
   }
-  return '';
-});
+  return ''
+})
 </script>
 
 <style scoped>

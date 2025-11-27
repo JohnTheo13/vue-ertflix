@@ -70,21 +70,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { useGetApi } from '~/composables/useGetApi';
-import type { Show } from '~/types/Show'; // Ensure this type matches your interface
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGetApi } from '~/composables/useGetApi'
+import type { Show } from '~/types/Show' // Ensure this type matches your interface
 
-const { params } = useRoute();
-const { data: show, error, loading } = useGetApi<Show>(`shows/${params.id}`);
+const { params } = useRoute()
+const { data: show, error, loading } = useGetApi<Show>(`shows/${params.id}`)
 
 const sanitizedSummary = computed(() => {
   if (show.value?.summary) {
     // Sanitization function can be added here
-    return show.value.summary;
+    return show.value.summary
   }
-  return '';
-});
+  return ''
+})
 </script>
 
 <style scoped>

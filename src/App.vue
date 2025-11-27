@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { provide } from 'vue';
-import AppFooter from '~/components/AppFooter.vue';
-import AppHeader from '~/components/AppHeader.vue';
-import { createShowsStore, showsStoreKey } from './store/useShowsStore';
+import { provide } from 'vue'
+import AppFooter from '~/components/AppFooter.vue'
+import AppHeader from '~/components/AppHeader.vue'
+import { createShowsStore, showsStoreKey } from './store/useShowsStore'
 
 // Create an instance of the store
-const showsStore = createShowsStore();
+const showsStore = createShowsStore()
 
 // Provide the store to all descendant components using the unique key
-provide(showsStoreKey, showsStore);
+provide(showsStoreKey, showsStore)
 </script>
 
 <template>

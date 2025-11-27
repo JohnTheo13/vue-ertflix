@@ -1,42 +1,45 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useGetApi } from '~/composables/useGetApi';
-import type { Show } from '~/types/Show';
+import { onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import ShowCard from '~/components/ShowCard.vue'
+import { useGetApi } from '~/composables/useGetApi'
+import type { Show } from '~/types/Show'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
-const searchQuery = ref((route.query.q as string) || '');
-let debounceTimeout: number | undefined;
+const searchQuery = ref((route.query.q as string) || '')
+let debounceTimeout: number | undefined
 
 // Initialize useGetApi with disabled auto-fetch
-const { data: results, fetchData } = useGetApi<{ score: number; show: Show }[]>(
-  'shows',
-  false,
-);
+const {
+  data: results,
+  fetchData,
+  loading: isLoading,
+  error,
+} = useGetApi<{ score: number; show: Show }[]>('shows', false)
 
 // Watch for changes in input and debounce the search
 watch(searchQuery, (newQuery) => {
   // Update URL query param
-  router.replace({ query: { ...route.query, q: newQuery || undefined } });
+  router.replace({ query: { ...route.query, q: newQuery || undefined } })
 
-  if (debounceTimeout) clearTimeout(debounceTimeout);
+  if (debounceTimeout) clearTimeout(debounceTimeout)
 
   debounceTimeout = setTimeout(() => {
     if (newQuery.trim()) {
-      fetchData(`search/shows?q=${newQuery}`);
+      fetchData(`search/shows?q=${newQuery}`)
     } else {
-      results.value = [];
+      results.value = []
     }
-  }, 500) as unknown as number;
-});
+  }, 500) as unknown as number
+})
 
 onMounted(() => {
   if (searchQuery.value.trim()) {
-    fetchData(`search/shows?q=${searchQuery.value}`);
+    fetchData(`search/shows?q=${searchQuery.value}`)
   }
-});
+})
 </script>
 
 <template>
