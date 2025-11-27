@@ -63,4 +63,48 @@ p {
   background-color: rgba(109, 109, 110, 0.7);
   color: white;
 }
+
+@media (max-width: 768px) {
+  .hero-content {
+    left: 2rem;
+    bottom: 10%;
+    max-width: 80%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    left: 1rem;
+    bottom: 5%;
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
 </style>

@@ -28,11 +28,10 @@ const navigateToShow = (id: number) => {
 .show-card {
   flex: 0 0 auto;
   width: 100%;
-  max-width: 240px; /* Prevent cards from getting too wide */
+  max-width: 240px;
   margin: 0 auto;
-  margin-right: 10px;
   transition: transform 0.2s;
-  user-select: none; /* Prevent text selection while dragging */
+  user-select: none;
   position: relative;
 
   /* Reset button styles */
@@ -41,7 +40,7 @@ const navigateToShow = (id: number) => {
   border-radius: 4px;
   padding: 0;
   cursor: pointer;
-  text-align: left; /* Ensure content aligns correctly */
+  text-align: left;
 }
 
 @media (max-width: 768px) {
@@ -63,7 +62,7 @@ const navigateToShow = (id: number) => {
 .show-card img {
   width: 100%;
   border-radius: 4px;
-  pointer-events: none; /* Prevent image drag ghosting */
+  pointer-events: none;
 }
 
 .show-card-info {

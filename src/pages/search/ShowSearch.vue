@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import ShowCard from '~/components/ShowCard.vue';
 import { useGetApi } from '~/composables/useGetApi';
 import type { Show } from '~/types/Show';
 
@@ -12,11 +11,10 @@ const searchQuery = ref((route.query.q as string) || '');
 let debounceTimeout: number | undefined;
 
 // Initialize useGetApi with disabled auto-fetch
-const {
-  data: results,
-  loading: isLoading,
-  fetchData,
-} = useGetApi<{ score: number; show: Show }[]>('shows', false);
+const { data: results, fetchData } = useGetApi<{ score: number; show: Show }[]>(
+  'shows',
+  false,
+);
 
 // Watch for changes in input and debounce the search
 watch(searchQuery, (newQuery) => {

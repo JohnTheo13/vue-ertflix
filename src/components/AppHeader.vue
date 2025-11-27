@@ -35,4 +35,19 @@ nav a {
   height: 30px;
   border-radius: 4px;
 }
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 24px;
+  }
+
+  nav a {
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
 </style>
