@@ -1,7 +1,7 @@
 <template>
-  <div class="movie-card">
+  <div class="show-card">
     <img :src="image" :alt="title" />
-    <div class="movie-card-info">
+    <div class="show-card-info">
       <div>{{ genre }}</div>
       <div>{{ rating }} ⭐</div>
     </div>
@@ -10,15 +10,15 @@
 
 <script setup lang="ts">
 defineProps<{
-  image: string;
+  image?: string;
   title: string;
   genre: string;
-  rating: number;
+  rating: string;
 }>();
 </script>
 
 <style scoped>
-.movie-card {
+.show-card {
   flex: 0 0 auto;
   width: 200px;
   margin-right: 10px;
@@ -27,17 +27,17 @@ defineProps<{
   position: relative;
 }
 
-.movie-card:hover {
+.show-card:hover {
   transform: scale(1.05);
 }
 
-.movie-card img {
+.show-card img {
   width: 100%;
   border-radius: 4px;
   pointer-events: none; /* Prevent image drag ghosting */
 }
 
-.movie-card-info {
+.show-card-info {
   position: absolute;
   display: flex;
   flex-direction: column;

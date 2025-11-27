@@ -5,10 +5,6 @@
     </div>
     <div class="hero-content">
       <h1>Movie Title</h1>
-      <p>
-        This is a brief and captivating description of the movie. It should be
-        engaging and make the user want to watch it.
-      </p>
       <div class="hero-buttons">
         <button class="play-button">Play</button>
         <button class="info-button">More Info</button>

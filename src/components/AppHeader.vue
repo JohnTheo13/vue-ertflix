@@ -2,15 +2,8 @@
   <header class="header">
     <img src="/logo.svg" alt="Erthflix" class="logo" />
     <nav>
-      <a href="#">Home</a>
-      <a href="#">TV Shows</a>
-      <a href="#">Movies</a>
-      <a href="#">New & Popular</a>
-      <a href="#">My List</a>
+      <router-link to="/">Home</router-link>
     </nav>
-    <div class="user-profile">
-      <img src="/avatar.png" alt="User Profile" class="avatar" />
-    </div>
   </header>
 </template>
 
