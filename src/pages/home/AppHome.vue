@@ -54,7 +54,6 @@ const recommendedShows = computed(() => {
   return []
 })
 
-console.log(allShows.value, recommendedShows.value)
 </script>
 
 <template>

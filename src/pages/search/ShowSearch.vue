@@ -16,7 +16,6 @@ const {
   data: results,
   fetchData,
   loading: isLoading,
-  error,
 } = useGetApi<{ score: number; show: Show }[]>('shows', false)
 
 // Watch for changes in input and debounce the search
