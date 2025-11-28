@@ -4,12 +4,7 @@ A Netflix-like video streaming application clone built with Vue 3, TypeScript, a
 
 ## 🚀 Features
 
-- **Browse Shows**: View trending shows by genre (Drama, Thriller, Sci-Fi).
-- **Search**: Real-time search with debouncing and URL synchronization.
-- **Show Details**: Detailed view with ratings, genres, and summaries.
-- **Responsive Design**: Optimized for Desktop, Tablet, and Mobile.
-- **Custom Store**: Lightweight state management using Vue's `provide`/`inject`.
-- **Caching**: In-memory caching for API requests to minimize network traffic.
+For a detailed list of features, please see [Features](docs/features/Features.md).
 
 ## 🛠️ Tech Stack
 
