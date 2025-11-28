@@ -45,6 +45,39 @@ pnpm dev
 
 The application will be available at `http://localhost:5173`.
 
+## 🐳 Docker
+
+You can run the application using Docker in two modes: Production and Development.
+
+### Production (Nginx)
+
+This builds the application and serves it using Nginx.
+
+1. Build and start the container:
+   ```bash
+   docker compose up --build -d
+   ```
+
+2. Access the application at `http://localhost:8080`.
+
+3. Stop the container:
+   ```bash
+   docker compose down
+   ```
+
+### Development (Hot Reload)
+
+This runs the application in development mode with hot reloading enabled.
+
+1. Start the development container:
+   ```bash
+   docker compose -f docker-compose.dev.yml up --build
+   ```
+
+2. Access the application at `http://localhost:5173`.
+
+3. Changes to your code will automatically update the running application.
+
 ## 🏗️ Building for Production
 
 Build the application for production:
