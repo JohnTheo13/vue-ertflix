@@ -1,5 +1,90 @@
-# Vue 3 + TypeScript + Vite
+# Ertflix App
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A Netflix-like video streaming application clone built with Vue 3, TypeScript, and Vite. This project demonstrates modern frontend architecture using custom state management, composables, and responsive CSS-first styling.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 🚀 Features
+
+- **Browse Shows**: View trending shows by genre (Drama, Thriller, Sci-Fi).
+- **Search**: Real-time search with debouncing and URL synchronization.
+- **Show Details**: Detailed view with ratings, genres, and summaries.
+- **Responsive Design**: Optimized for Desktop, Tablet, and Mobile.
+- **Custom Store**: Lightweight state management using Vue's `provide`/`inject`.
+- **Caching**: In-memory caching for API requests to minimize network traffic.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Vue 3 (Composition API, `<script setup>`)
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Routing**: Vue Router
+- **Styling**: CSS (Scoped, Grid, Flexbox)
+- **Linting/Formatting**: Biome
+- **Testing**: Vitest (Unit), Playwright (E2E)
+
+## 📋 Prerequisites
+
+Ensure you have the following installed on your machine:
+
+- **Node.js**: v18.0.0 or higher
+- **pnpm**: v8.0.0 or higher
+
+## 📦 Installation
+
+1. Clone the repository:
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+## 🏃‍♂️ Running the Project
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+## 🏗️ Building for Production
+
+Build the application for production:
+
+```bash
+pnpm build
+```
+
+Preview the production build locally:
+
+```bash
+pnpm preview
+```
+
+## 🧪 Testing & Linting
+
+Run unit tests (Vitest):
+
+```bash
+pnpm test:unit
+```
+
+Run end-to-end tests (Playwright):
+
+```bash
+pnpm test:e2e
+```
+
+Run linter and formatter (Biome):
+
+```bash
+# Check for issues
+pnpm check
+
+# Fix issues automatically
+pnpm check:fix
+```
+
+## 📐 Architecture
+
+For detailed information about the architectural decisions made in this project, please refer to the [Architecture Decisions Log](docs/adr/0001-record-architecture-decisions.md).
+
+

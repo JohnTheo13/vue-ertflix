@@ -1,7 +1,9 @@
-import { fileURLToPath } from 'node:url';
-import vue from '@vitejs/plugin-vue';
-import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+/// <reference types="vitest/config" />
+import { fileURLToPath } from 'node:url'
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+import { configDefaults } from 'vitest/config'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,4 +37,18 @@ export default defineConfig({
       '~': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-});
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    pool: 'threads',
+    watch: false,
+    logHeapUsage: true,
+    testTimeout: 4000,
+    server: {
+      deps: {
+        inline: true,
+      },
+    },
+    exclude: [...configDefaults.exclude, '**/e2e/**'],
+  },
+})
