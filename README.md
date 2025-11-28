@@ -25,13 +25,19 @@ A Netflix-like video streaming application clone built with Vue 3, TypeScript, a
 
 Ensure you have the following installed on your machine:
 
-- **Node.js**: v18.0.0 or higher
-- **pnpm**: v8.0.0 or higher
+- **Node.js**: v20.0.0 or higher
+- **pnpm**: v8.0.0 or higher (managed via Corepack)
+
+> **Tip:** This project includes an `.nvmrc` file. If you use [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager), you can run `nvm use` to automatically switch to the correct Node.js version.
 
 ## 📦 Installation
 
 1. Clone the repository:
-2. Install dependencies:
+2. Enable Corepack (optional but recommended):
+   ```bash
+   corepack enable
+   ```
+3. Install dependencies:
    ```bash
    pnpm install
    ```
