@@ -33,7 +33,7 @@ const mockLoading = ref(false)
 const mockError = ref(null)
 
 vi.mock('~/composables/useGetApi', () => ({
-  useGetApi: (url: string, enabled: boolean) => ({
+  useGetApi: (_url: string, _enabled: boolean) => ({
     data: mockResults,
     fetchData: mockFetchData,
     loading: mockLoading,

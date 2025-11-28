@@ -44,8 +44,7 @@ const recommendedShows = computed(() => {
      * and filter only those with images.
      */
     const weekNumber = Math.floor(
-      (new Date().getTime() -
-        new Date(new Date().getFullYear(), 0, 1).getTime()) /
+      (Date.now() - new Date(new Date().getFullYear(), 0, 1).getTime()) /
         (7 * 24 * 60 * 60 * 1000),
     )
     return allShows.value
