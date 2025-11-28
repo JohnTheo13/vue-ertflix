@@ -21,27 +21,23 @@ For a detailed list of features, please see [Features](docs/features/Features.md
 Ensure you have the following installed on your machine:
 
 - **Node.js**: v20.0.0 or higher
-- **pnpm**: v8.0.0 or higher (managed via Corepack)
+- **npm**: v10.0.0 or higher
 
 > **Tip:** This project includes an `.nvmrc` file. If you use [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager), you can run `nvm use` to automatically switch to the correct Node.js version.
 
 ## 📦 Installation
 
 1. Clone the repository:
-2. Enable Corepack (optional but recommended):
+2. Install dependencies:
    ```bash
-   corepack enable
-   ```
-3. Install dependencies:
-   ```bash
-   pnpm install
+   npm install
    ```
 ## 🏃‍♂️ Running the Project
 
 Start the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 The application will be available at `http://localhost:5173`.
@@ -84,13 +80,13 @@ This runs the application in development mode with hot reloading enabled.
 Build the application for production:
 
 ```bash
-pnpm build
+npm run build
 ```
 
 Preview the production build locally:
 
 ```bash
-pnpm preview
+npm run preview
 ```
 
 ## 🧪 Testing & Linting
@@ -98,23 +94,23 @@ pnpm preview
 Run unit tests (Vitest):
 
 ```bash
-pnpm test:unit
+npm run test:unit
 ```
 
 Run end-to-end tests (Playwright):
 
 ```bash
-pnpm test:e2e
+npm run test:e2e
 ```
 
 Run linter and formatter (Biome):
 
 ```bash
 # Check for issues
-pnpm check
+npm run check
 
 # Fix issues automatically
-pnpm check:fix
+npm run check:fix
 ```
 
 ## 📐 Architecture
