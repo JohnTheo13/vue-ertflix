@@ -69,6 +69,7 @@ export function createShowsStore() {
     comedyShows: computed(() => showsByGenre.value.comedyShows),
     actionShows: computed(() => showsByGenre.value.actionShows),
     storeReady: readonly(computed(() => allShows.value.length > 0)),
+    allShows: computed(() => allShows.value),
     // Action
     setShows,
   }
