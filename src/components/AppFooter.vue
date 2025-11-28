@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer-links">
@@ -23,9 +26,6 @@
   </footer>
 </template>
 
-<script setup lang="ts">
-</script>
-
 <style scoped>
 .footer {
   padding: 2rem;
@@ -44,6 +44,8 @@
 .footer-links a {
   color: #808080;
   text-decoration: none;
+  pointer-events: none;
+  user-select: none;
 }
 
 .footer-links a:hover {

@@ -1,21 +1,15 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <header class="header">
     <img src="/logo.svg" alt="Erthflix" class="logo" />
     <nav>
-      <a href="#">Home</a>
-      <a href="#">TV Shows</a>
-      <a href="#">Movies</a>
-      <a href="#">New & Popular</a>
-      <a href="#">My List</a>
+      <router-link to="/">Home</router-link>
+      <router-link to="/search">Search</router-link>
     </nav>
-    <div class="user-profile">
-      <img src="/avatar.png" alt="User Profile" class="avatar" />
-    </div>
   </header>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style scoped>
 .header {
@@ -40,5 +34,20 @@ nav a {
 .avatar {
   height: 30px;
   border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 24px;
+  }
+
+  nav a {
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+  }
 }
 </style>

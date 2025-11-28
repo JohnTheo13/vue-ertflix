@@ -1,25 +1,57 @@
-# 1. Record architecture decisions
+# Architecture Decisions Log
 
-*   **Status:** Accepted
-*   **Date:** 2025-11-24
+## 1. Use Vue 3 with TypeScript
+* **Status:** Accepted
+* **Context:** We need a modern, performant frontend framework with strong typing support for a maintainable codebase.
+* **Decision:** Use Vue 3 with the Composition API (`<script setup>`) and TypeScript.
+* **Consequences:** 
+  * Better type safety and developer experience.
+  * Access to modern Vue features and performance improvements.
 
-## Context
+## 2. Custom State Management via Provide/Inject
+* **Status:** Accepted
+* **Context:** The application needs global state to manage TV show lists (Drama, Thriller, etc.) across components. The requirement was to avoid external libraries like Pinia.
+* **Decision:** Implement a custom store pattern using Vue's native `reactive`, `provide`, and `inject` APIs.
+* **Consequences:**
+  * Zero external dependencies for state management.
+  * Simplified data flow for this specific application scale.
+  * Requires manual management of injection keys (`showsStoreKey`).
 
-As the project grows, we need a way to document and justify the architectural decisions we make. This will help current and future team members understand the reasoning behind our technical choices.
+## 3. Centralized Data Fetching with Caching
+* **Status:** Accepted
+* **Context:** The application interacts with the TVMaze API. We need to handle loading states, errors, and avoid redundant network requests when navigating.
+* **Decision:** Create a generic `useGetApi` composable that includes an in-memory caching mechanism using a `Map`.
+* **Consequences:**
+  * Improved performance by serving repeated requests from cache.
+  * Consistent handling of `loading` and `error` states across views.
+  * Decoupled API logic from UI components.
 
-## Decision
+## 4. CSS-First Styling Strategy
+* **Status:** Accepted
+* **Context:** The application requires a bespoke, Netflix-like dark theme with specific responsive behaviors.
+* **Decision:** Use standard CSS with Vue's Scoped Styles. Layouts utilize CSS Grid and Flexbox.
+* **Consequences:**
+  * No dependency on heavy CSS frameworks (Tailwind, Bootstrap).
+  * Granular control over responsiveness (Desktop, Tablet, Mobile) via custom `@media` queries.
+  * "Carousel" behavior implemented with native CSS scroll snapping.
 
-We will use Architecture Decision Records (ADRs) to document significant architectural decisions. ADRs will be stored as Markdown files in the `docs/adr` directory.
+## 5. Search State Synchronization
+* **Status:** Accepted
+* **Context:** Users expect search results to be shareable and persistent across reloads.
+* **Decision:** Synchronize the search input state with the URL query parameters (`?q=...`) using Vue Router.
+* **Consequences:**
+  * Search results are bookmarkable and shareable.
+  * Requires debouncing to prevent excessive history state updates and API calls.
 
-Each ADR will follow a simple template including:
-*   Title
-*   Status (e.g., Proposed, Accepted, Superseded)
-*   Context (the forces at play)
-*   Decision (the change we're proposing)
-*   Consequences (the result of the decision)
+## 6. Testing Strategy
+* **Status:** Accepted
+* **Context:** To ensure application reliability and prevent regressions, we need a robust testing strategy covering both individual units and end-to-end user flows.
+* **Decision:** 
+  * Use **Vitest** for Unit Testing: It integrates natively with Vite, offering fast execution and a Jest-compatible API.
+  * Use **Playwright** for End-to-End (E2E) Testing: It provides reliable cross-browser testing and powerful debugging tools for user interactions.
+* **Consequences:**
+  * **Unit Tests**: Cover critical logic in stores, composables, and components (e.g., `useShowsStore`, `useGetApi`, `ShowCard`).
+  * **E2E Tests**: Verify critical user journeys (Home page load, Search functionality, Navigation) in a real browser environment.
+  * CI/CD pipelines can now enforce quality gates.
 
-## Consequences
 
-*   We have a clear, documented history of our architectural evolution.
-*   Onboarding new developers will be easier as they can read through the project's technical history.
-*   There is a slight overhead in creating and maintaining these records.

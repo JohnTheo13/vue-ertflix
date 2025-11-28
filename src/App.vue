@@ -1,43 +1,29 @@
 <script setup lang="ts">
-import Header from './components/Header.vue';
-import Hero from './components/Hero.vue';
-import MediaRow from './components/MediaRow.vue';
-import Footer from './components/Footer.vue';
+import { provide } from 'vue'
+import AppFooter from '~/components/AppFooter.vue'
+import AppHeader from '~/components/AppHeader.vue'
+import { createShowsStore, showsStoreKey } from './store/useShowsStore'
 
-const trending = [
-  { id: 1, title: 'Movie 1', image: '/placeholder.jpg' },
-  { id: 2, title: 'Movie 2', image: '/placeholder.jpg' },
-  { id: 3, title: 'Movie 3', image: '/placeholder.jpg' },
-  { id: 4, title: 'Movie 4', image: '/placeholder.jpg' },
-  { id: 5, title: 'Movie 5', image: '/placeholder.jpg' },
-  { id: 6, title: 'Movie 6', image: '/placeholder.jpg' },
-];
+// Create an instance of the store
+const showsStore = createShowsStore()
 
-const topRated = [
-  { id: 1, title: 'Movie 1', image: '/placeholder.jpg' },
-  { id: 2, title: 'Movie 2', image: '/placeholder.jpg' },
-  { id: 3, title: 'Movie 3', image: '/placeholder.jpg' },
-  { id: 4, title: 'Movie 4', image: '/placeholder.jpg' },
-  { id: 5, title: 'Movie 5', image: '/placeholder.jpg' },
-  { id: 6, title: 'Movie 6', image: '/placeholder.jpg' },
-];
+// Provide the store to all descendant components using the unique key
+provide(showsStoreKey, showsStore)
 </script>
 
 <template>
-  <Header />
+  <app-header />
   <main>
-    <Hero />
-    <MediaRow title="Trending Now" :items="trending" />
-    <MediaRow title="Top Rated" :items="topRated" />
+    <router-view />
   </main>
-  <Footer />
+  <app-footer />
 </template>
 
 <style>
 body {
   background-color: #141414;
   color: white;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
 }
 </style>
