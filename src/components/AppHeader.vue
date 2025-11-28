@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <header class="header">
     <img src="/logo.svg" alt="Erthflix" class="logo" />
@@ -7,9 +10,6 @@
     </nav>
   </header>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style scoped>
 .header {

@@ -1,13 +1,3 @@
-<template>
-  <button :class="['show-card', className]" @click="navigateToShow(id)">
-    <div class="show-card-info">
-      <span>{{ genre }}</span>
-      <span>{{ rating }} ⭐</span>
-    </div>
-    <img :src="image" :alt="title" />
-  </button>
-</template>
-
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
@@ -26,6 +16,16 @@ const navigateToShow = (id: number) => {
   router.push(`/details/${id}`)
 }
 </script>
+
+<template>
+  <button :class="['show-card', className]" @click="navigateToShow(id)">
+    <div class="show-card-info">
+      <span>{{ genre }}</span>
+      <span>{{ rating }} ⭐</span>
+    </div>
+    <img :src="image" :alt="title" />
+  </button>
+</template>
 
 <style scoped>
 .show-card {

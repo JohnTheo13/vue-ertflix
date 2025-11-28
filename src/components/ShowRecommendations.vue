@@ -1,28 +1,3 @@
-<template>
-  <div class="hero" v-if="currentShow">
-    <div class="hero-background">
-      <img :src="currentShow.image?.original" :alt="currentShow.name" />
-      <div class="overlay"></div>
-    </div>
-    <div class="hero-content">
-      <h1>{{ currentShow.name }}</h1>
-      <div class="summary" v-html="currentShow.summary"></div>
-      <div class="hero-buttons">
-        <button class="info-button" @click="goToDetails">More Info</button>
-      </div>
-    </div>
-    <div class="dots">
-      <span
-        v-for="(show, index) in shows"
-        :key="show.id"
-        class="dot"
-        :class="{ active: index === currentIndex }"
-        @click="setIndex(index)"
-      ></span>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -79,6 +54,31 @@ onUnmounted(() => {
   stopTimer()
 })
 </script>
+
+<template>
+  <div class="hero" v-if="currentShow">
+    <div class="hero-background">
+      <img :src="currentShow.image?.original" :alt="currentShow.name" />
+      <div class="overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1>{{ currentShow.name }}</h1>
+      <div class="summary" v-html="currentShow.summary"></div>
+      <div class="hero-buttons">
+        <button class="info-button" @click="goToDetails">More Info</button>
+      </div>
+    </div>
+    <div class="dots">
+      <span
+        v-for="(show, index) in shows"
+        :key="show.id"
+        class="dot"
+        :class="{ active: index === currentIndex }"
+        @click="setIndex(index)"
+      ></span>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .hero {

@@ -1,23 +1,3 @@
-<template>
-  <div class="show-row">
-    <h2>{{ title }}</h2>
-    <div class="row-container">
-      <button v-if="canScrollLeft" class="scroll-btn left" @click="scrollLeft">‹</button>
-      <div class="carousel-track" ref="track" @scroll="checkScroll">
-        <show-card
-          v-for="item in items"
-          :key="item.id"
-          :id="item.id"
-          :image="item.image?.medium"
-          :title="item.name"
-          :rating="item.rating?.average?.toString() ?? 'N/A'"
-        />
-      </div>
-      <button v-if="canScrollRight" class="scroll-btn right" @click="scrollRight">›</button>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import type { Show } from '~/types/Show'
@@ -64,6 +44,26 @@ onUnmounted(() => {
   window.removeEventListener('resize', checkScroll)
 })
 </script>
+
+<template>
+  <div class="show-row">
+    <h2>{{ title }}</h2>
+    <div class="row-container">
+      <button v-if="canScrollLeft" class="scroll-btn left" @click="scrollLeft">‹</button>
+      <div class="carousel-track" ref="track" @scroll="checkScroll">
+        <show-card
+          v-for="item in items"
+          :key="item.id"
+          :id="item.id"
+          :image="item.image?.medium"
+          :title="item.name"
+          :rating="item.rating?.average?.toString() ?? 'N/A'"
+        />
+      </div>
+      <button v-if="canScrollRight" class="scroll-btn right" @click="scrollRight">›</button>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .show-row {

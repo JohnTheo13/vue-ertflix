@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGetApi } from '~/composables/useGetApi'
+import type { Show } from '~/types/Show' // Ensure this type matches your interface
+
+const { params } = useRoute()
+const { data: show, error, loading } = useGetApi<Show>(`shows/${params.id}`)
+
+const sanitizedSummary = computed(() => {
+  if (show.value?.summary) {
+    // Sanitization function can be added here
+    return show.value.summary
+  }
+  return ''
+})
+</script>
+
 <template>
   <div class="show-details" v-if="!loading && show">
     <!-- Background Image -->
@@ -68,24 +86,6 @@
     <p>Loading...</p>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useGetApi } from '~/composables/useGetApi'
-import type { Show } from '~/types/Show' // Ensure this type matches your interface
-
-const { params } = useRoute()
-const { data: show, error, loading } = useGetApi<Show>(`shows/${params.id}`)
-
-const sanitizedSummary = computed(() => {
-  if (show.value?.summary) {
-    // Sanitization function can be added here
-    return show.value.summary
-  }
-  return ''
-})
-</script>
 
 <style scoped>
 .show-details {
