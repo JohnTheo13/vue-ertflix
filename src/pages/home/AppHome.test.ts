@@ -12,6 +12,14 @@ vi.mock('~/components/ShowRow.vue', () => ({
   },
 }))
 
+// Mock ShowRecommendations component
+vi.mock('~/components/ShowRecommendations.vue', () => ({
+  default: {
+    template: '<div data-testid="show-recommendations"></div>',
+    props: ['shows'],
+  },
+}))
+
 // Mock useGetApi
 const mockUseGetApi = vi.fn()
 vi.mock('~/composables/useGetApi', () => ({
@@ -36,6 +44,7 @@ describe('AppHome.vue', () => {
       fictionShows: ref([]),
       comedyShows: ref([]),
       actionShows: ref([]),
+      allShows: ref([]),
       setShows: mockSetShows,
       storeReady: ref(false),
     }
@@ -89,6 +98,7 @@ describe('AppHome.vue', () => {
       fictionShows: ref([]),
       comedyShows: ref([]),
       actionShows: ref([]),
+      allShows: ref([]),
       setShows: vi.fn(),
       storeReady: ref(true),
     }
@@ -121,6 +131,7 @@ describe('AppHome.vue', () => {
       fictionShows: ref([]),
       comedyShows: ref([]),
       actionShows: ref([]),
+      allShows: ref([]),
       setShows: vi.fn(),
       storeReady: ref(false),
     }
@@ -149,6 +160,7 @@ describe('AppHome.vue', () => {
       fictionShows: ref([]),
       comedyShows: ref([]),
       actionShows: ref([]),
+      allShows: ref([]),
       setShows: vi.fn(),
       storeReady: ref(false),
     }

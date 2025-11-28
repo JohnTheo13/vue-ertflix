@@ -53,7 +53,6 @@ const recommendedShows = computed(() => {
   }
   return []
 })
-
 </script>
 
 <template>
