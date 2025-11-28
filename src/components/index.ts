@@ -1,0 +1,5 @@
+export { default as AppFooter } from './AppFooter.vue'
+export { default as AppHeader } from './AppHeader.vue'
+export { default as AppRecommendations } from './AppRecommendations.vue'
+export { default as ShowCard } from './ShowCard.vue'
+export { default as ShowRow } from './ShowRow.vue'

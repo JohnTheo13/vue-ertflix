@@ -1,7 +1,7 @@
 export class ParsedError extends Error {
   constructor(message: string) {
-    super(message);
-    this.name = 'ParsedError';
+    super(message)
+    this.name = 'ParsedError'
   }
 }
 
@@ -12,10 +12,10 @@ export class ParsedError extends Error {
  */
 export function parseError(error: unknown): ParsedError {
   if (error instanceof Error) {
-    return new ParsedError(error.message);
+    return new ParsedError(error.message)
   } else if (typeof error === 'string') {
-    return new ParsedError(error);
+    return new ParsedError(error)
   } else {
-    return new ParsedError('An unknown error occurred');
+    return new ParsedError('An unknown error occurred')
   }
 }

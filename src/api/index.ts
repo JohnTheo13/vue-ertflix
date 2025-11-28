@@ -1,2 +1,2 @@
-export * from './apiFetch';
-export * from './errorParser';
+export * from './apiFetch'
+export * from './errorParser'

@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
-const AppHome = () => import('~/pages/home/AppHome.vue');
-const ShowDetails = () => import('~/pages/details/ShowDetails.vue');
-const ShowSearch = () => import('~/pages/search/ShowSearch.vue');
+const AppHome = () => import('~/pages/home/AppHome.vue')
+const ShowDetails = () => import('~/pages/details/ShowDetails.vue')
+const ShowSearch = () => import('~/pages/search/ShowSearch.vue')
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -12,4 +12,4 @@ export const router = createRouter({
     { path: '/search/:query', component: ShowSearch },
     { path: '/search', component: ShowSearch },
   ],
-});
+})
