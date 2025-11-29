@@ -27,16 +27,17 @@ watch(searchQuery, (newQuery) => {
 
   debounceTimeout = setTimeout(() => {
     if (newQuery.trim()) {
-      fetchData(`search/shows?q=${newQuery}`)
+      const sanitizedQuery = encodeURIComponent(newQuery.trim())
+      fetchData(`search/shows?q=${sanitizedQuery}`)
     } else {
       results.value = []
     }
   }, 500) as unknown as number
 })
-
 onMounted(() => {
   if (searchQuery.value.trim()) {
-    fetchData(`search/shows?q=${searchQuery.value}`)
+    const sanitizedQuery = encodeURIComponent(searchQuery.value.trim())
+    fetchData(`search/shows?q=${sanitizedQuery}`)
   }
 })
 </script>
