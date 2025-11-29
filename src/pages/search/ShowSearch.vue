@@ -133,7 +133,7 @@ onMounted(() => {
   font-size: 1.2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .search-page {
     padding: 1rem;
   }
@@ -149,7 +149,7 @@ onMounted(() => {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: var(--breakpoint-mobile)) {
   .search-header h1 {
     font-size: 1.5rem;
   }

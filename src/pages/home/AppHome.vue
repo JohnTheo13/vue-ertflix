@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, inject, watch } from 'vue'
-import ShowRecommendations from '~/components/ShowRecommendations.vue'
-import ShowRow from '~/components/ShowRow.vue'
 import { useGetApi } from '~/composables/useGetApi'
+import ShowRecommendations from '~/pages/home/ShowRecommendations.vue'
 import { showsStoreKey } from '~/store/useShowsStore'
 import type { Show } from '~/types/Show'
+import ShowRow from './ShowRow.vue'
 
 const showsStore = inject(showsStoreKey)
 if (!showsStore) {
@@ -57,7 +57,7 @@ const recommendedShows = computed(() => {
 
 <template>
   <div v-if="loading">Loading shows...</div>
-  <div v-else-if="error">Could not load shows. Please try again later.</div>
+  <div v-else-if="error">Could not load shows: {{ error.message }}</div>
   <template v-else>
     <show-recommendations :shows="recommendedShows" />
     <show-row title="Drama" :items="dramaShows" />

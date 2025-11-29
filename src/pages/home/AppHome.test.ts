@@ -5,7 +5,7 @@ import { showsStoreKey } from '../../store/useShowsStore'
 import AppHome from './AppHome.vue'
 
 // Mock ShowRow component
-vi.mock('~/components/ShowRow.vue', () => ({
+vi.mock('./ShowRow.vue', () => ({
   default: {
     template: '<div data-testid="show-row" :title="title"></div>',
     props: ['title', 'items'],
@@ -13,7 +13,7 @@ vi.mock('~/components/ShowRow.vue', () => ({
 }))
 
 // Mock ShowRecommendations component
-vi.mock('~/components/ShowRecommendations.vue', () => ({
+vi.mock('./ShowRecommendations.vue', () => ({
   default: {
     template: '<div data-testid="show-recommendations"></div>',
     props: ['shows'],

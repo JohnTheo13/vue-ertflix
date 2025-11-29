@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import ShowRow from './ShowRow.vue'
 
 // Mock ShowCard component to avoid testing child implementation
-vi.mock('./ShowCard.vue', () => ({
+vi.mock('~/components/ShowCard.vue', () => ({
   default: {
     template: '<div class="mock-show-card" data-testid="show-card"></div>',
     props: ['title', 'id'],

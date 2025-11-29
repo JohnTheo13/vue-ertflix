@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import ShowCard from '~/components/ShowCard.vue'
 import type { Show } from '~/types/Show'
-import ShowCard from './ShowCard.vue'
 
 defineProps<{
   title: string
@@ -21,16 +21,26 @@ const checkScroll = () => {
   }
 }
 
+// Calculate scroll amount based on card width and gap
+const getScrollAmount = () => {
+  if (!track.value || !track.value.firstElementChild) return 0
+  const card = track.value.firstElementChild as HTMLElement
+  const gap = parseFloat(window.getComputedStyle(track.value).gap) || 0
+  return (card.offsetWidth + gap) * 3
+}
+
 const scrollLeft = () => {
   if (track.value) {
-    track.value.scrollBy({ left: -600, behavior: 'smooth' })
+    const scrollAmount = getScrollAmount()
+    track.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
     // checkScroll will be triggered by the scroll event
   }
 }
 
 const scrollRight = () => {
   if (track.value) {
-    track.value.scrollBy({ left: 600, behavior: 'smooth' })
+    const scrollAmount = getScrollAmount()
+    track.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
     // checkScroll will be triggered by the scroll event
   }
 }
@@ -49,7 +59,9 @@ onUnmounted(() => {
   <div class="show-row">
     <h2>{{ title }}</h2>
     <div class="row-container">
-      <button v-if="canScrollLeft" class="scroll-btn left" @click="scrollLeft">‹</button>
+      <button v-if="canScrollLeft" class="scroll-btn left" @click="scrollLeft">
+        ‹
+      </button>
       <div class="carousel-track" ref="track" @scroll="checkScroll">
         <show-card
           v-for="item in items"
@@ -60,7 +72,13 @@ onUnmounted(() => {
           :rating="item.rating?.average?.toString() ?? 'N/A'"
         />
       </div>
-      <button v-if="canScrollRight" class="scroll-btn right" @click="scrollRight">›</button>
+      <button
+        v-if="canScrollRight"
+        class="scroll-btn right"
+        @click="scrollRight"
+      >
+        ›
+      </button>
     </div>
   </div>
 </template>
@@ -68,12 +86,15 @@ onUnmounted(() => {
 <style scoped>
 .show-row {
   margin: 2rem 0;
+  width: 100%;
 }
 
 .row-container {
   position: relative;
-  padding: 0 20px; 
+  margin: auto;
   margin-bottom: 40px;
+  width: calc(6 * var(--card-width-desktop) + 4.6rem); /* 6 cards + gaps */
+  max-width: 100%;
 }
 
 .scroll-btn {
@@ -96,16 +117,22 @@ onUnmounted(() => {
 }
 
 .scroll-btn.left {
-  left: 0;
+  left: -20px;
 }
 
 .scroll-btn.right {
-  right: 0;
+  right: -20px;
 }
 
 @media (hover: none) and (pointer: coarse) {
   .scroll-btn {
     display: none;
+  }
+}
+
+@media (max-width: var(--breakpoint-tablet)) {
+  .row-container {
+    width: calc(4 * var(--card-width-desktop) + 3.6rem); /* 4 cards + gaps */
   }
 }
 
@@ -117,7 +144,7 @@ onUnmounted(() => {
 .carousel-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 1.5rem;
+  gap: var(--row-gap);
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 1rem;
@@ -145,5 +172,4 @@ onUnmounted(() => {
 .carousel-track {
   scroll-snap-type: x mandatory;
 }
-
 </style>

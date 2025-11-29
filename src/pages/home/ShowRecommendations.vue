@@ -181,7 +181,7 @@ h1 {
   background-color: white;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .hero-content {
     left: 2rem;
     bottom: 15%;
@@ -203,7 +203,7 @@ h1 {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: var(--breakpoint-mobile)) {
   .hero-content {
     left: 1rem;
     bottom: 5%;

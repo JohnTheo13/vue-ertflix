@@ -11,6 +11,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --card-width-desktop: 12.6vw;
+  --card-width-mobile: 40vw;
+  --row-gap: 1.2rem;
+
+  /* Base spacing unit. Usage: calc(var(--base-space) * multiplier) */
+  --base-space: 2px;
+
+  /* Breakpoints */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
 }
 
 body {
@@ -20,7 +32,7 @@ body {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: var(--breakpoint-desktop);
   min-height: 100vh;
   margin: 0 auto;
   padding: 2rem;

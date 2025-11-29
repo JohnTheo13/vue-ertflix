@@ -30,9 +30,7 @@ const navigateToShow = (id: number) => {
 <style scoped>
 .show-card {
   flex: 0 0 auto;
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto;
+  width: var(--card-width-desktop);
   transition: transform 0.2s;
   user-select: none;
   position: relative;
@@ -46,15 +44,9 @@ const navigateToShow = (id: number) => {
   text-align: left;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-mobile)) {
   .show-card {
-    max-width: 180px;
-  }
-}
-
-@media (max-width: 480px) {
-  .show-card {
-    max-width: 150px;
+    width: var(--card-width-mobile);
   }
 }
 
