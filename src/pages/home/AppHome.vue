@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, inject, watch } from 'vue'
-import ShowRecommendations from '~/components/ShowRecommendations.vue'
-import ShowRow from '~/components/ShowRow.vue'
 import { useGetApi } from '~/composables/useGetApi'
+import ShowRecommendations from '~/pages/home/ShowRecommendations.vue'
 import { showsStoreKey } from '~/store/useShowsStore'
 import type { Show } from '~/types/Show'
+import ShowRow from './ShowRow.vue'
 
 const showsStore = inject(showsStoreKey)
 if (!showsStore) {
@@ -26,6 +26,7 @@ const {
   error,
   loading,
   data: fetchedShows,
+  // We disable auto-fetching if the store is ready
 } = useGetApi<Show[]>('shows', !storeReady.value)
 
 watch(fetchedShows, (newShows) => {
@@ -37,15 +38,16 @@ watch(fetchedShows, (newShows) => {
 const recommendedShows = computed(() => {
   if (allShows.value.length > 0) {
     /**
-     * Given that shows are sorted by rating, we most likely get the top 10
-     * displayed in the home screen rows.
-     * We choose to display recommendations starting after the first 10,
-     * selecting a different group of shows for each week of the year.
-     * and filter only those with images.
+     * * Given that shows are sorted by rating, we most likely get the top 10
+     * * displayed in the home screen rows.
+     * * We choose to display recommendations starting after the first 10,
+     * * selecting a different group of shows for each week of the year.
+     * * and filter only those with images.
      */
+    const now = new Date()
+    const startOfYear = new Date(now.getFullYear(), 0, 1)
     const weekNumber = Math.floor(
-      (Date.now() - new Date(new Date().getFullYear(), 0, 1).getTime()) /
-        (7 * 24 * 60 * 60 * 1000),
+      (now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000),
     )
     return allShows.value
       .slice(10 + weekNumber, 16 + weekNumber)
@@ -57,7 +59,7 @@ const recommendedShows = computed(() => {
 
 <template>
   <div v-if="loading">Loading shows...</div>
-  <div v-else-if="error">Could not load shows. Please try again later.</div>
+  <div v-else-if="error">Could not load shows: {{ error.message }}</div>
   <template v-else>
     <show-recommendations :shows="recommendedShows" />
     <show-row title="Drama" :items="dramaShows" />

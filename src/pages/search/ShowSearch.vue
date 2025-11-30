@@ -27,16 +27,17 @@ watch(searchQuery, (newQuery) => {
 
   debounceTimeout = setTimeout(() => {
     if (newQuery.trim()) {
-      fetchData(`search/shows?q=${newQuery}`)
+      const sanitizedQuery = encodeURIComponent(newQuery.trim())
+      fetchData(`search/shows?q=${sanitizedQuery}`)
     } else {
       results.value = []
     }
   }, 500) as unknown as number
 })
-
 onMounted(() => {
   if (searchQuery.value.trim()) {
-    fetchData(`search/shows?q=${searchQuery.value}`)
+    const sanitizedQuery = encodeURIComponent(searchQuery.value.trim())
+    fetchData(`search/shows?q=${sanitizedQuery}`)
   }
 })
 </script>
@@ -120,8 +121,8 @@ onMounted(() => {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width-desktop), 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
   justify-items: center;
 }
@@ -144,7 +145,7 @@ onMounted(() => {
   }
 
   .results-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width-mobile), 1fr));
     gap: 1.5rem;
   }
 }

@@ -5,7 +5,7 @@ import { showsStoreKey } from '../../store/useShowsStore'
 import AppHome from './AppHome.vue'
 
 // Mock ShowRow component
-vi.mock('~/components/ShowRow.vue', () => ({
+vi.mock('./ShowRow.vue', () => ({
   default: {
     template: '<div data-testid="show-row" :title="title"></div>',
     props: ['title', 'items'],
@@ -13,7 +13,7 @@ vi.mock('~/components/ShowRow.vue', () => ({
 }))
 
 // Mock ShowRecommendations component
-vi.mock('~/components/ShowRecommendations.vue', () => ({
+vi.mock('./ShowRecommendations.vue', () => ({
   default: {
     template: '<div data-testid="show-recommendations"></div>',
     props: ['shows'],
@@ -67,18 +67,6 @@ describe('AppHome.vue', () => {
 
     // Should call API with enabled = true
     expect(mockUseGetApi).toHaveBeenCalledWith('shows', true)
-
-    // Watcher should trigger setShows
-    // We need to wait for the watcher to fire. Since we passed a ref that already has value,
-    // the watch might fire immediately or we might need nextTick.
-    // However, in setup(), watch(ref) fires if ref has value?
-    // Actually, watch sources are lazy by default unless immediate: true.
-    // But here we are watching the return value of useGetApi.
-
-    // Let's simulate the data arriving if it wasn't immediate,
-    // but here we mocked it to return a ref with value.
-    // The component does: watch(fetchedShows, (newShows) => { ... })
-    // If fetchedShows changes, it triggers.
 
     // To ensure watch triggers, we can update the ref value if needed,
     // but let's check if it works with initial value or if we need to trigger it.
