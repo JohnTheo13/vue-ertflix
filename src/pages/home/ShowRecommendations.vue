@@ -61,13 +61,9 @@ onUnmounted(() => {
       <img :src="currentShow.image?.original" :alt="currentShow.name" />
       <div class="overlay"></div>
     </div>
-    <div class="hero-content">
-      <h1>{{ currentShow.name }}</h1>
-      <div class="summary" v-html="currentShow.summary"></div>
-      <div class="hero-buttons">
-        <button class="info-button" @click="goToDetails">More Info</button>
-      </div>
-    </div>
+    <h1>{{ currentShow.name }}</h1>
+    <div class="summary" v-html="currentShow.summary"></div>
+    <button class="info-button" @click="goToDetails">More Info</button>
     <div class="dots">
       <span
         v-for="(show, index) in shows"
@@ -87,6 +83,20 @@ onUnmounted(() => {
   height: 70vh;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+  padding: 0 1rem;
+  padding-bottom: 0.6rem;
+  box-sizing: border-box;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 .hero-background {
@@ -116,56 +126,45 @@ onUnmounted(() => {
   );
 }
 
-.hero-content {
-  position: absolute;
-  bottom: 20%;
-  left: 4rem;
-  max-width: 600px;
-  z-index: 10;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
 .summary {
   font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  position: relative;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   display: -webkit-box;
-  line-clamp: 3;
+  /* 100% - <dots-padding-height> - <h1-height-margin> - <button-height> */
+  height: calc(100% - 1.6rem - 5rem - 6rem);
   -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.hero-buttons button {
-  padding: 0.75rem 2rem;
-  margin-right: 1rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.hero-buttons button:hover {
-  transform: scale(1.05);
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  width: 40%;
+  margin-bottom: calc(1 * var(--base-space));
 }
 
 .info-button {
   background-color: rgba(109, 109, 110, 0.7);
   color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  height: 3rem;
+  width: 40%;
+}
+
+.info-button button:hover {
+  transform: scale(1.05);
 }
 
 .dots {
-  position: absolute;
-  bottom: 2rem;
-  right: 4rem;
   display: flex;
   gap: 0.5rem;
   z-index: 10;
+  user-select: none;
+  align-self: end;
+  height: 1rem;
 }
 
 .dot {
@@ -182,47 +181,29 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  .hero-content {
-    left: 2rem;
-    bottom: 15%;
-    max-width: 80%;
-  }
 
-  h1 {
+  .hero h1 {
     font-size: 2rem;
   }
 
   .summary {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .info-button {
+    width: 100%;
   }
 
   .dots {
-    right: 50%;
-    transform: translateX(50%);
-    bottom: 1rem;
+    align-self: center;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-content {
-    left: 1rem;
-    bottom: 5%;
-    max-width: 90%;
-  }
 
-  h1 {
+  .hero h1 {
     font-size: 1.5rem;
-  }
-
-  .hero-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .hero-buttons button {
-    width: 100%;
-    margin-right: 0;
   }
 }
 </style>
