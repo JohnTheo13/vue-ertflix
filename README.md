@@ -32,6 +32,12 @@ Ensure you have the following installed on your machine:
    ```bash
    npm install
    ```
+3. Configure environment variables:
+   Create a `.env` file in the root directory based on `.env.samle`:
+   ```env
+   VITE_API_URL=<your-api>
+   ```
+
 ## 🏃‍♂️ Running the Project
 
 Start the development server:
