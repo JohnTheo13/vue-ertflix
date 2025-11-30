@@ -44,12 +44,6 @@ const navigateToShow = (id: number) => {
   text-align: left;
 }
 
-@media (max-width: var(--breakpoint-mobile)) {
-  .show-card {
-    width: var(--card-width-mobile);
-  }
-}
-
 .show-card:hover {
   transform: scale(1.08);
 }
@@ -67,10 +61,29 @@ const navigateToShow = (id: number) => {
   padding: 0 1.2rem;
   align-items: flex-end;
   top: 1rem;
-  width: -webkit-fill-available;
+  width: 100%;
+  box-sizing: border-box;
+  left: 0;
   color: white;
   font-size: 1.2rem;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.829);
   background-color: rgba(95, 158, 160, 0.493);
 }
+
+/* @media (max-width: 768px) {
+  .show-card-info {
+    font-size: 0.8rem;
+  }
+  
+} */
+
+@media (max-width: 768px) {
+  .show-card {
+    width: var(--card-width-mobile);
+  }
+  .show-card-info {
+    font-size: 0.8rem;
+  }
+}
+
 </style>

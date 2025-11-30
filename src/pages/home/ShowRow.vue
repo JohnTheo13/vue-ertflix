@@ -130,9 +130,9 @@ onUnmounted(() => {
   }
 }
 
-@media (max-width: var(--breakpoint-tablet)) {
+@media (max-width: 768px) {
   .row-container {
-    width: calc(4 * var(--card-width-desktop) + 3.6rem); /* 4 cards + gaps */
+    width: calc(4 * var(--card-width-desktop) + 3.6rem);
   }
 }
 

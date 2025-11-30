@@ -121,8 +121,8 @@ onMounted(() => {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width-desktop), 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
   justify-items: center;
 }
@@ -134,7 +134,7 @@ onMounted(() => {
   font-size: 1.2rem;
 }
 
-@media (max-width: var(--breakpoint-tablet)) {
+@media (max-width: 768px) {
   .search-page {
     padding: 1rem;
   }
@@ -145,12 +145,12 @@ onMounted(() => {
   }
 
   .results-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width-mobile), 1fr));
     gap: 1.5rem;
   }
 }
 
-@media (max-width: var(--breakpoint-mobile)) {
+@media (max-width: 480px) {
   .search-header h1 {
     font-size: 1.5rem;
   }
