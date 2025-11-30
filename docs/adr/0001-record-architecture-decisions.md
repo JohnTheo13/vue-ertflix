@@ -17,12 +17,11 @@
   * Simplified data flow for this specific application scale.
   * Requires manual management of injection keys (`showsStoreKey`).
 
-## 3. Centralized Data Fetching with Caching
+## 3. Centralized Data Fetching
 * **Status:** Accepted
 * **Context:** The application interacts with the TVMaze API. We need to handle loading states, errors, and avoid redundant network requests when navigating.
-* **Decision:** Create a generic `useGetApi` composable that includes an in-memory caching mechanism using a `Map`.
+* **Decision:** Create a generic `useGetApi` composable.
 * **Consequences:**
-  * Improved performance by serving repeated requests from cache.
   * Consistent handling of `loading` and `error` states across views.
   * Decoupled API logic from UI components.
 

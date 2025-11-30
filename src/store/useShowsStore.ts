@@ -19,6 +19,8 @@ export function createShowsStore() {
     const fictionShows: Show[] = []
     const comedyShows: Show[] = []
     const actionShows: Show[] = []
+
+    // Build a lookup map of shows by ID for efficient retrieval (avoid fetching details)
     const shows: Record<string, Show> = {}
 
     for (const show of allShows.value) {
@@ -52,7 +54,11 @@ export function createShowsStore() {
     }
   })
 
-  // Action - A simple setter function to update the state
+  /**
+   * * Action - A simple setter function to update the state
+   * * This function also sorts the shows by rating in descending order first so all the getters return sorted shows.
+   * @param {Show[]} data - Array of shows to set in the store
+   */
   function setShows(data: Show[]) {
     // sort shows by rating descending
     data.sort((a, b) => (b.rating?.average ?? 0) - (a.rating?.average ?? 0))

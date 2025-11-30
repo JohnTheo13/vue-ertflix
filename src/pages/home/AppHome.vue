@@ -26,6 +26,7 @@ const {
   error,
   loading,
   data: fetchedShows,
+  // We disable auto-fetching if the store is ready
 } = useGetApi<Show[]>('shows', !storeReady.value)
 
 watch(fetchedShows, (newShows) => {
@@ -37,15 +38,16 @@ watch(fetchedShows, (newShows) => {
 const recommendedShows = computed(() => {
   if (allShows.value.length > 0) {
     /**
-     * Given that shows are sorted by rating, we most likely get the top 10
-     * displayed in the home screen rows.
-     * We choose to display recommendations starting after the first 10,
-     * selecting a different group of shows for each week of the year.
-     * and filter only those with images.
+     * * Given that shows are sorted by rating, we most likely get the top 10
+     * * displayed in the home screen rows.
+     * * We choose to display recommendations starting after the first 10,
+     * * selecting a different group of shows for each week of the year.
+     * * and filter only those with images.
      */
+    const now = new Date()
+    const startOfYear = new Date(now.getFullYear(), 0, 1)
     const weekNumber = Math.floor(
-      (Date.now() - new Date(new Date().getFullYear(), 0, 1).getTime()) /
-        (7 * 24 * 60 * 60 * 1000),
+      (now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000),
     )
     return allShows.value
       .slice(10 + weekNumber, 16 + weekNumber)

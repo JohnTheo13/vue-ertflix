@@ -20,7 +20,7 @@ const { shows } = showsStore
 const showData = computed(() => {
   const showId = params.id as string
   if (shows.value[showId]) {
-    // If the show is in our store, return it in a consistent shape.
+    // If the show is in our store, return it directly (avoid API call).
     // We use `ref()` to make sure the structure matches what useGetApi returns.
 
     return {
@@ -123,7 +123,7 @@ const sanitizedSummary = computed(() => {
 <style scoped>
 .show-details {
   position: relative;
-  isolation: isolate; /* Create a new stacking context */
+  isolation: isolate;
   min-height: 100vh;
   color: white;
   overflow: hidden;
@@ -151,7 +151,7 @@ const sanitizedSummary = computed(() => {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 30vh; /* Push content down to reveal background */
+  padding-top: 30vh;
 }
 
 .meta-row {

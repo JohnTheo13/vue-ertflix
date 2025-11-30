@@ -68,18 +68,6 @@ describe('AppHome.vue', () => {
     // Should call API with enabled = true
     expect(mockUseGetApi).toHaveBeenCalledWith('shows', true)
 
-    // Watcher should trigger setShows
-    // We need to wait for the watcher to fire. Since we passed a ref that already has value,
-    // the watch might fire immediately or we might need nextTick.
-    // However, in setup(), watch(ref) fires if ref has value?
-    // Actually, watch sources are lazy by default unless immediate: true.
-    // But here we are watching the return value of useGetApi.
-
-    // Let's simulate the data arriving if it wasn't immediate,
-    // but here we mocked it to return a ref with value.
-    // The component does: watch(fetchedShows, (newShows) => { ... })
-    // If fetchedShows changes, it triggers.
-
     // To ensure watch triggers, we can update the ref value if needed,
     // but let's check if it works with initial value or if we need to trigger it.
     // Usually watch doesn't fire immediately unless immediate: true.
