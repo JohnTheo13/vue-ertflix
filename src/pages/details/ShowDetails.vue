@@ -82,29 +82,29 @@ const sanitizedSummary = computed(() => {
       <div class="summary" v-html="sanitizedSummary"></div>
 
       <!-- Additional Info Grid -->
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="label">Language</span>
-          <span class="value">{{ show.language }}</span>
-        </div>
-        <div class="info-item" v-if="show.network">
-          <span class="label">Network</span>
-          <span class="value">{{ show.network.name }}</span>
-        </div>
-        <div class="info-item">
-          <span class="label">Type</span>
-          <span class="value">{{ show.type }}</span>
-        </div>
-        <div class="info-item" v-if="show.officialSite">
-          <span class="label">Website</span>
-          <a
-            :href="show.officialSite"
-            target="_blank"
-            class="value link"
-            rel="noopener noreferrer"
-            >Visit Official Site</a
-          >
-        </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="label">Language</span>
+        <span class="value">{{ show.language }}</span>
+      </div>
+      <div class="info-item" v-if="show.network">
+        <span class="label">Network</span>
+        <span class="value">{{ show.network.name }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Type</span>
+        <span class="value">{{ show.type }}</span>
+      </div>
+      <div class="info-item" v-if="show.officialSite">
+        <span class="label">Website</span>
+        <a
+          :href="show.officialSite"
+          target="_blank"
+          class="value link"
+          rel="noopener noreferrer"
+          >Visit Official Site</a
+        >
       </div>
     </div>
   </div>
@@ -149,9 +149,9 @@ const sanitizedSummary = computed(() => {
 
 .content {
   max-width: 900px;
-  margin: 0 auto;
   padding: 20px;
   padding-top: 30vh;
+  max-width: 40%;
 }
 
 .meta-row {
@@ -233,4 +233,13 @@ const sanitizedSummary = computed(() => {
   font-size: 1.5rem;
   color: #888;
 }
+
+@media (max-width: 768px) {
+  .content {
+    max-width: unset;
+    padding: 15px;
+    padding-top: 10vh;
+  }
+}
+
 </style>
